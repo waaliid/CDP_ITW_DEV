@@ -8,26 +8,70 @@
 </head>
 <body>
 <form action="create_atelier.php">
-  Titre:<br>
-  <input type="text" name="firstname" value="Mickey">
+  <h1>Ajout d'un atelier</h1>
+  <input type="text" name="firstname" value="Titre">
   <br>
-  Thème :<br>
-  <input type="text" name="lastname" value="Mouse">
+  <input type="text" name="lastname" value="Thème">
   <br>
-	Laboratoire :<br>
-  <input type="text" name="lastname" value="Mouse">
+  <input type="text" name="firstname" value="Type">
   <br>
-   Autre :<br>
-  <input type="text" name="lastname" value="Mouse">
+	Date : <br>
+  <TABLE>
+    <tr>
+    <td>
+    <input type="checkbox" name="" value="">Lundi matin<br>
+    </td>
+    <td>
+    <input type="checkbox" name="" value="">Lundi après-midi<br>
+    </td> 
+    </tr>
+    <tr>
+    <td>
+    <input type="checkbox" name="" value="">Mardi matin<br>
+    </td>
+    <td>
+    <input type="checkbox" name="" value="">Mardi après-midi<br>
+    </td> 
+    </tr>
+    <tr>
+    <td>
+    <input type="checkbox" name="" value="">Mercredi matin<br>
+    </td>
+    <td>
+    <input type="checkbox" name="" value="">Mercredi après-midi<br>
+    </td> 
+    </tr>
+    <tr>
+    <td>
+    <input type="checkbox" name="" value="">Jeudi matin<br>
+    </td>
+    <td>
+    <input type="checkbox" name="" value="">Jeudi après-midi<br>
+    </td> 
+    </tr>
+    <tr>
+    <td>
+    <input type="checkbox" name="" value="">Vendredi matin<br>
+    </td>
+    <td>
+    <input type="checkbox" name="" value="">Vendredi après-midi<br>
+    </td> 
+    </tr>
+    
+  </TABLE>
+  <input type="text" name="lastname" value="Laboratoire">
   <br>
-   Decription :<br>
+  <input type="text" name="lastname" value="Lieu">
+  <br>
   <textarea rows="4" cols="50">
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta finibus elit. Aliquam ultrices congue ligula, non aliquet augue lobortis sed. Sed euismod tortor non arcu auctor malesuada. Curabitur ac orci in est dignissim pharetra vitae et mi. Proin ligula orci, vehicula ac augue at, condimentum ornare arcu. Aliquam sodales posuere porta. Cras eget sagittis elit, in molestie odio.
-
-Curabitur semper ante at ex bibendum pharetra. Sed viverra massa vel ex ullamcorper volutpat. Fusce tincidunt sed eros eget convallis. Mauris suscipit, nunc a facilisis suscipit, mi felis congue massa, at tincidunt diam erat vitae lacus. In augue massa, aliquet vitae maximus a, pellentesque quis turpis. Integer erat ex, vehicula ac velit id, molestie tincidunt nisi. Vestibulum eu ligula nunc. Ut bibendum congue tortor sed interdum. Nullam in rhoncus nulla. Proin et dui a est viverra scelerisque. Nam non arcu pretium, facilisis eros a, porta odio. Suspendisse vitae commodo ipsum.
-
-</textarea>
+   Remarque
+  </textarea>
   <br>
+  <input type="text" name="lastname" value="Dureé de l'atelier">
+  <br>
+  <input type="text" name="lastname" value="Capacité">
+  <br>
+  
   <input type="submit" value="valider">
 </form> 
 </body>
