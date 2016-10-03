@@ -9,11 +9,19 @@ input[type=text]{
     box-sizing: border-box;
 }
 
+input[type=checkbox]{
+    margin:auto;
+}
+
 form{
 	text-align:center;
 	margin:auto;
 }
 
+table{
+    text-align:center;
+    margin:auto;
+}
 
 textarea, select{
 	width: 30%;
@@ -31,7 +39,7 @@ input[type=text]:focus , textarea:focus{
 }
 
 input[type=button], input[type=submit], input[type=reset] {
-    background-color: deeppink;
+    background-color: #40A497;
     border: none;
     color: white;
     padding: 16px 32px;
