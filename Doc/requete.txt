@@ -1,0 +1,34 @@
+Différentes requetes SQL pour la gestion des ateliers :
+
+
+
+Atelier(id_atelier,titre, thème, type, date, remarque, id_Labo#, lieu, durée, capacité)
+
+date(id_atelier#,lundi,mardi,mercredi,jeudi,vendredi ...)
+
+
+Requête permettant d'ajouter un atelier :
+INSERT INTO Atelier(id_atelier,titre, thème, type, date, remarque, id_Labo#, lieu, durée, capacité) VALUES('', 'Atelier SVT', 'Corp Humain', '', , , '')
+
+Requête permettant de lister les ateliers par leur nom :
+
+SELECT titre
+FROM Atelier
+
+
+Requête permettant de récupérer toute les informations sur un atelier :
+
+SELECT *
+FROM Atelier
+
+
+Requête de suppression d’un atelier selon son id :
+
+DELETE FROM Atelier WHERE id_atelier = 'xxxx'
+
+
+Requête de mise à jour des données d’un atelier selon des informations donnés :
+
+UPDATE Atelier SET titre = '', thème = '', type= '', date = '', remarque = '', lieu = '', durée = '' WHERE id_atelier = 'xxxx'
+
+
