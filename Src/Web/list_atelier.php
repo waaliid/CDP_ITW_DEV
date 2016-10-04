@@ -1,3 +1,4 @@
+<?php include("connexion.php");?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,39 +13,48 @@
 <form id="edit-form" method = "POST">
 
 <div class = "form-group" >
-<select id ="workshopSelector" name="workshopList[]" multiple>
+<h3>Liste des Ateliers</h3>
+<table>
+ 	<tr>
+ 	<th>Titre</th>
+ 	<th>Thème</th>
+ 	<th>Type</th>
+ 	<th>Remarque</th>
+ 	<th>Lieu</th>
+ 	<th>Durée</th>
+ 	<th>Capacité</th>
+ 	<th>Modifier</th>
+ 	<th>Supprimer</th>
 
+ 	</tr>
 <?php
-
-include("connexion.php");
-
-
-$reponse = $bdd->query('SELECT titre FROM atelier');
-$i = 1;
+$reponse = $bdd->query('SELECT * FROM atelier');
 while ($donnees = $reponse->fetch())
-{
-	echo "<option value=";
-	echo "\"$i\">";
-	echo $donnees['titre'];
-	echo "</option>";
-	$i = $i + 1;
+{ ?>
+
+	<tr>
+		<td><?php echo $donnees['titre']; ?></td>
+		<td><?php echo $donnees['theme']; ?></td>
+		<td><?php echo $donnees['type']; ?></td>
+		<td><?php echo $donnees['Remarque']; ?></td>
+		<td><?php echo $donnees['lieu']; ?></td>
+		<td><?php echo $donnees['duree']; ?></td>
+		<td><?php echo $donnees['capacite']; ?></td>
+		<td><input type="submit" id= "editWorkshop" value="modifier" formaction="edit_atelier.php"></td>
+		<td><input type="submit" id="deleteWorkshop" class="delete_confirm" data-confirm="Etes vous sûr de vouloir supprimmer cet atelier?" value="supprimer" formaction="delete_atelier.php" ></td>
+	</tr>
+<?php 
 }
 
 $reponse->closeCursor();
 
 ?>
-
-</select>
+</table>
 </div>
 
 <div class= "form-inline">
-<input type="submit" id= "editWorkshop" value="modifier" formaction="edit_atelier.php">
-<input type="submit" id="deleteWorkshop" class="delete_confirm" data-confirm="Etes vous sûr de vouloir supprimmer cet atelier?" value="supprimer" formaction="delete_atelier.php" >
 </div>
 
 </form>
-
 </body>
 </html>
-
-
