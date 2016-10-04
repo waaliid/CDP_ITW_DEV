@@ -32,3 +32,22 @@ Requête de mise à jour des données d’un atelier selon des informations donn
 UPDATE Atelier SET titre = '', thème = '', type= '', date = '', remarque = '', lieu = '', durée = '' WHERE id_atelier = 'xxxx'
 
 
+
+
+Génération des données factisse pour les tests :
+
+INSERT INTO `laboratoire`(`id_labo`, `nom`, `adresse`) VALUES (1,"Labri","Universite de Bordeaux 1")
+INSERT INTO `laboratoire`(`id_labo`, `nom`, `adresse`) VALUES (2,"CNRS","Institut de recherche Bordeaux")
+INSERT INTO `laboratoire`(`id_labo`, `nom`, `adresse`) VALUES (3,"INRIA","Institut national de recherche en informatique Bordeaux")
+
+
+INSERT INTO `atelier`(`id_Atelier`, `titre`, `theme`, `type`, `Remarque`, `lieu`, `duree`, `capacite`, `id_creneaux`, `id_labo`) VALUES (1,"L'évolution, toute une histoire","SVT","activite","Aucune","Salle Omega",120,40,1,1)
+
+INSERT INTO `atelier`(`id_Atelier`, `titre`, `theme`, `type`, `Remarque`, `lieu`, `duree`, `capacite`, `id_creneaux`, `id_labo`) VALUES (2,"Apprendre facilement le c++","Informatique","cours","Ordinateur requis","Salle Alpha",90,20,2,3)
+
+INSERT INTO `atelier`(`id_Atelier`, `titre`, `theme`, `type`, `Remarque`, `lieu`, `duree`, `capacite`, `id_creneaux`, `id_labo`) VALUES (3,"Biodiversité, richesse du vivant","SVT","cours","Aucune","Salle Beta",60,150,3,2)
+
+
+INSERT INTO `creneaux`(`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES (1,1,00,01,10,11,00)
+INSERT INTO `creneaux`(`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES (2,2,11,11,00,00,00)
+INSERT INTO `creneaux`(`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES (3,3,10,10,10,10,00)
