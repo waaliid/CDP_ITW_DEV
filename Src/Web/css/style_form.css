@@ -1,3 +1,25 @@
+html, body {
+
+margin: 0;
+padding: 0;
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+background: #F8F8F8;
+font-size: 12px;
+}
+
+table {
+    width: 70%;
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+}
+
+tr.even{background:#fff;}
+tr.even label {color:#919191;}
+tr.odd{background:#EFF7FF;}
+tr.odd:hover{background:#e0eaf3;}
+tr.even:hover{background:#e0eaf3;}
+tbody tr.even td{border-bottom:1px solid #ddd;}
+tbody tr.odd td{border-bottom:1px solid #ddd;}
 
 input[type=text]{
 	width: 30%;
