@@ -13,10 +13,27 @@
 
 <div class = "form-group" >
 <select id ="workshopSelector" name="workshopList[]" multiple>
-  <option value="1">La terre dans le système solaire</option>
-  <option value="2">Le code, tout un programme</option>
-  <option value="3">Neurone artificiel</option>
-  <option value="4">Illusion sonore</option>
+
+<?php
+
+include("connexion.php");
+
+
+$reponse = $bdd->query('SELECT titre FROM atelier');
+$i = 1;
+while ($donnees = $reponse->fetch())
+{
+	echo "<option value=";
+	echo "\"$i\">";
+	echo $donnees['titre'];
+	echo "</option>";
+	$i = $i + 1;
+}
+
+$reponse->closeCursor();
+
+?>
+
 </select>
 </div>
 
@@ -29,3 +46,5 @@
 
 </body>
 </html>
+
+
