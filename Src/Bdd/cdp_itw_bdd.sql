@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 04 Octobre 2016 à 18:11
+-- Généré le :  Mar 04 Octobre 2016 à 19:36
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -46,7 +46,9 @@ CREATE TABLE `atelier` (
 INSERT INTO `atelier` (`id_Atelier`, `titre`, `theme`, `type`, `Remarque`, `lieu`, `duree`, `capacite`, `id_creneaux`, `id_labo`) VALUES
 (1, 'L\'évolution, toute une histoire', 'SVT', 'activite', 'Aucune', 'Salle Omega', 120, 40, 1, 1),
 (2, 'Apprendre facilement le c++', 'Informatique', 'cours', 'Ordinateur requis', 'Salle Alpha', 90, 20, 2, 3),
-(3, 'Biodiversité, richesse du vivant', 'SVT', 'cours', 'Aucune', 'Salle Beta', 60, 150, 3, 2);
+(3, 'Biodiversité, richesse du vivant', 'SVT', 'cours', 'Aucune', 'Salle Beta', 60, 150, 3, 2),
+(4, 'Les dessous du Web', 'Informatique', 'Travaux Pratique', 'Aucune', 'Salle Omega', 80, 35, 4, 2),
+(5, 'Le sport un art de vivre', 'Sport', 'activité', 'Aucune', 'Salle Gymnase', 120, 50, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -71,7 +73,9 @@ CREATE TABLE `creneaux` (
 INSERT INTO `creneaux` (`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES
 (1, 1, '0', '1', '10', '11', '0'),
 (2, 2, '11', '11', '0', '0', '0'),
-(3, 3, '10', '10', '10', '10', '0');
+(3, 3, '10', '10', '10', '10', '0'),
+(4, 4, '0', '11', '11', '10', '11'),
+(5, 5, '10', '10', '11', '10', '11');
 
 -- --------------------------------------------------------
 
@@ -127,12 +131,12 @@ ALTER TABLE `laboratoire`
 -- AUTO_INCREMENT pour la table `atelier`
 --
 ALTER TABLE `atelier`
-  MODIFY `id_Atelier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_Atelier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `creneaux`
 --
 ALTER TABLE `creneaux`
-  MODIFY `id_creneau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_creneau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `laboratoire`
 --

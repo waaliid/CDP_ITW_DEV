@@ -51,3 +51,12 @@ INSERT INTO `atelier`(`id_Atelier`, `titre`, `theme`, `type`, `Remarque`, `lieu`
 INSERT INTO `creneaux`(`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES (1,1,00,01,10,11,00)
 INSERT INTO `creneaux`(`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES (2,2,11,11,00,00,00)
 INSERT INTO `creneaux`(`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES (3,3,10,10,10,10,00)
+
+
+INSERT INTO `creneaux`(`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES (4,4,00,11,11,10,11)
+INSERT INTO `creneaux`(`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES (5,5,10,10,11,10,11)
+
+
+INSERT INTO `atelier`(`id_Atelier`, `titre`, `theme`, `type`, `Remarque`, `lieu`, `duree`, `capacite`, `id_creneaux`, `id_labo`) VALUES (4,"Les dessous du Web","Informatique","Travaux Pratique","Aucune","Salle Omega",80,35,4,2)
+
+INSERT INTO `atelier`(`id_Atelier`, `titre`, `theme`, `type`, `Remarque`, `lieu`, `duree`, `capacite`, `id_creneaux`, `id_labo`) VALUES (5,"Le sport un art de vivre","Sport","activité","Aucune","Salle Gymnase",120,50,5,1)
