@@ -15,7 +15,8 @@
 <div class = "form-group" >
 <h3>Liste des Ateliers</h3>
 <table>
- 	<tr>
+      
+	<tr>
  	<th>Titre</th>
  	<th>Thème</th>
  	<th>Type</th>
@@ -32,7 +33,13 @@ $reponse = $bdd->query('SELECT * FROM atelier');
 while ($donnees = $reponse->fetch())
 { ?>
 
-	<tr>
+	 <?php $bool=true; 
+        if ($bool== true){$bool = false;?>
+        <tr class="even">
+        <?php }else{$bool=true;?>
+        <tr class="odd">
+     <?php }?>
+	
 		<td><?php echo $donnees['titre']; ?></td>
 		<td><?php echo $donnees['theme']; ?></td>
 		<td><?php echo $donnees['type']; ?></td>
@@ -40,8 +47,9 @@ while ($donnees = $reponse->fetch())
 		<td><?php echo $donnees['lieu']; ?></td>
 		<td><?php echo $donnees['duree']; ?></td>
 		<td><?php echo $donnees['capacite']; ?></td>
-		<td><input type="submit" id= "editWorkshop" value="modifier" formaction="edit_atelier.php"></td>
-		<td><input type="submit" id="deleteWorkshop" class="delete_confirm" data-confirm="Etes vous sûr de vouloir supprimmer cet atelier?" value="supprimer" formaction="delete_atelier.php" ></td>
+		<td><a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir modifier ?')) document.location.href='edit_atelier.php?modif_article=<?php echo $donnees['id_Atelier']; ?>'">Modifier</a></td>
+
+		<td><a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir supprimer ?')) document.location.href='delete_atelier.php?supp_article=<?php echo $donnees['id_Atelier']; ?>'">Supprimer</a></td>
 	</tr>
 <?php 
 }
