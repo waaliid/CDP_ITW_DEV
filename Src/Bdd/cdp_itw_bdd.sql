@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 03 Octobre 2016 à 21:14
+-- Généré le: Mar 04 Octobre 2016 à 14:18
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -40,7 +40,14 @@ CREATE TABLE IF NOT EXISTS `atelier` (
   PRIMARY KEY (`id_Atelier`),
   KEY `id_creneaux` (`id_creneaux`),
   KEY `id_labo` (`id_labo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `atelier`
+--
+
+INSERT INTO `atelier` (`id_Atelier`, `titre`, `theme`, `type`, `Remarque`, `lieu`, `duree`, `capacite`, `id_creneaux`, `id_labo`) VALUES
+(2, 'titre_test', 'theme1', 'type1', 'remarque1', 'talance', 12, 30, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -51,14 +58,21 @@ CREATE TABLE IF NOT EXISTS `atelier` (
 CREATE TABLE IF NOT EXISTS `creneaux` (
   `id_creneau` int(11) NOT NULL AUTO_INCREMENT,
   `id_atelier` int(11) NOT NULL,
-  `lundi` int(2) NOT NULL,
-  `mardi` int(2) NOT NULL,
-  `mercredi` int(2) NOT NULL,
-  `jeudi` int(2) NOT NULL,
-  `vendredi` int(2) NOT NULL,
+  `lundi` varchar(2) NOT NULL,
+  `mardi` varchar(2) NOT NULL,
+  `mercredi` varchar(2) NOT NULL,
+  `jeudi` varchar(2) NOT NULL,
+  `vendredi` varchar(2) NOT NULL,
   PRIMARY KEY (`id_creneau`),
   KEY `id_atelier` (`id_atelier`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `creneaux`
+--
+
+INSERT INTO `creneaux` (`id_creneau`, `id_atelier`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES
+(1, 2, '01', '01', '01', '01', '01');
 
 -- --------------------------------------------------------
 
@@ -71,23 +85,15 @@ CREATE TABLE IF NOT EXISTS `laboratoire` (
   `nom` varchar(50) NOT NULL,
   `adresse` text NOT NULL,
   PRIMARY KEY (`id_labo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Contraintes pour les tables exportées
+-- Contenu de la table `laboratoire`
 --
 
---
--- Contraintes pour la table `atelier`
---
-ALTER TABLE `atelier`
-  ADD CONSTRAINT `atelier_ibfk_3` FOREIGN KEY (`id_creneaux`) REFERENCES `creneaux` (`id_creneau`);
-
---
--- Contraintes pour la table `creneaux`
---
-ALTER TABLE `creneaux`
-  ADD CONSTRAINT `creneaux_ibfk_1` FOREIGN KEY (`id_atelier`) REFERENCES `atelier` (`id_Atelier`);
+INSERT INTO `laboratoire` (`id_labo`, `nom`, `adresse`) VALUES
+(1, 'CNRS', 'Talance'),
+(2, 'Inria', 'Talance');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
