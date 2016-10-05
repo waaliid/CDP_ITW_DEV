@@ -5,7 +5,26 @@
 	/**
 	 * Create a new workshop.
 	 */
-	 
+
+	function process_slots($slots){
+	    $result = array();
+        foreach($slots as $key => &$val){
+            if(count($val) == 2){
+               $result[$key] = "11";
+            }
+            if(count($val) == 1){
+                if(array_key_exists("am",$val)){
+                    $result[$key] = "10";
+                }else{
+                    $result[$key] = "01";
+                }
+            }
+            if(count($val) == 0){
+                $result[$key] = "00";
+            }
+        }
+        return $result;
+    }
 	function create_workshop($bdd, $arguments)
 	{
 		$state = array();
@@ -13,7 +32,7 @@
 		$keys = array_keys($arguments);
 		$values = array_values($arguments);
 
-		$sql_query = $bdd->prepare("INSERT INTO " . "atelier" . " (titre , theme, type, Remarque, lieu, duree, capacite,id_creneaux, id_labo)"
+		$sql_query = $bdd->prepare("INSERT INTO". " atelier"   . " (titre , theme, type, Remarque, lieu, duree, capacite,id_creneaux, id_labo)"
 												." VALUES ( :title, :theme, :type, :remarque, :place, :duration, :capacity, :id_creneaux, :id_lab)");
 		
 		$sql_query->bindParam($keys[0], $values[0]);
@@ -28,9 +47,7 @@
 
 
 		$sql_query->execute();
-		
-		echo $values[0];
-		
+				
 		if ($sql_query) {
 			$state['query'] = 1;
 		}
@@ -40,7 +57,47 @@
 		
 		return $state;
  	}	
- 	
+
+
+ 	function create_slots($bdd, $arguments,$id_atelier)
+    {
+        $state = array();
+
+        $original = array( "mon"=>array(), "tue" => array(), "wed" => array(), "thu" => array(), "fri" => array());
+        $complete = array_merge($original,$arguments);
+        $allKeys = array_merge(array("id_atelier"),array_keys($complete));
+
+        $keys = preg_filter('/^/', ':',$allKeys);
+
+        $new_arguments = process_slots($complete);
+        $values = array_merge(array($id_atelier),array_values($new_arguments));
+
+        $params = array_combine($keys,$values);
+
+
+        // -- insert into database
+        $query = "INSERT INTO". " creneaux "  . " (id_atelier,lundi,mardi,mercredi,jeudi,vendredi)"
+            ." VALUES (". implode(', ',$keys ) . ")";
+        var_dump($query);
+                $sql_query = $bdd->prepare($query);
+
+        foreach ($params as $key => &$val) {
+            var_dump($val);
+            $sql_query->bindParam($key, $val, PDO::PARAM_INT);
+        }
+
+
+        $sql_query->execute();
+
+                if ($sql_query) {
+                    $state['query'] = 1;
+                }
+                else {
+                    $state['query'] = 0;
+                }
+
+                return $state;
+        }
  if (isset($_POST["validate"]))
  {
  	
@@ -53,10 +110,15 @@
    	 $id_labo = '1';
    	 $id_creneaux = '1';
    	 $id_atelier = '4';
-   	 $remarque = "Remarque";
+   	 $remarque = $_POST['remark'];
    	 $workshop_data = array(":title" => $title , ":theme"=>$theme, ":type"=>$type, ":remarque" => $remarque, ":place"=>$place, ":duration"=>$duration, ":capacity"=>$capacity, ":id_creneaux"=>$id_creneaux,":id_lab"=>$id_labo);
 	 $response = create_workshop($bdd,$workshop_data);
 
+     if( isset($_POST['slots']) && is_array($_POST['slots']) ) {
+         $slots = $_POST['slots'];
+         $response = create_slots($bdd,$slots,$id_atelier);
+
+     }
 }
 ?>
 
@@ -81,42 +143,42 @@
   <TABLE>
     <tr>
     <td>
-    <input type="checkbox" name="" value="">Lundi matin<br>
+    <input type="checkbox" name="slots[mon][am]">Lundi matin<br>
     </td>
     <td>
-    <input type="checkbox" name="" value="">Lundi après-midi<br>
+    <input type="checkbox" name="slots[mon][pm]">Lundi après-midi<br>
     </td> 
     </tr>
     <tr>
     <td>
-    <input type="checkbox" name="" value="">Mardi matin<br>
+    <input type="checkbox" name="slots[tue][am]" >Mardi matin<br>
     </td>
     <td>
-    <input type="checkbox" name="" value="">Mardi après-midi<br>
+    <input type="checkbox" name="slots[tue][pm]" >Mardi après-midi<br>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <input type="checkbox" name="slots[wed][am]" value="">Mercredi matin<br>
+    </td>
+    <td>
+    <input type="checkbox" name="slots[wed][pm]" value="">Mercredi après-midi<br>
     </td> 
     </tr>
     <tr>
     <td>
-    <input type="checkbox" name="" value="">Mercredi matin<br>
+    <input type="checkbox" name="slots[thu][am]" value="">Jeudi matin<br>
     </td>
     <td>
-    <input type="checkbox" name="" value="">Mercredi après-midi<br>
+    <input type="checkbox" name="slots[thu][pm]" value="">Jeudi après-midi<br>
     </td> 
     </tr>
     <tr>
     <td>
-    <input type="checkbox" name="" value="">Jeudi matin<br>
+    <input type="checkbox" name="slots[fri][am]" value="">Vendredi matin<br>
     </td>
     <td>
-    <input type="checkbox" name="" value="">Jeudi après-midi<br>
-    </td> 
-    </tr>
-    <tr>
-    <td>
-    <input type="checkbox" name="" value="">Vendredi matin<br>
-    </td>
-    <td>
-    <input type="checkbox" name="" value="">Vendredi après-midi<br>
+    <input type="checkbox" name="slots[fri][pm]" value="">Vendredi après-midi<br>
     </td> 
     </tr>
     
@@ -130,9 +192,7 @@
 
               while ($lab = $sql_lab->fetch()) { ?>
 
-
                   <option value = "<?php echo $lab['nom']?>"> "<?php echo $lab['nom']?>" </option>
-
 
               <?php }}
           $sql_lab->closeCursor(); // we will not use it anymore, so we must close server connection
@@ -141,7 +201,7 @@
   <br>
   <input type="text" name="place">
   <br>
-  <textarea rows="4" cols="50">
+  <textarea name = "remark" rows="4" cols="50">
    Remarque
   </textarea>
   <br>
