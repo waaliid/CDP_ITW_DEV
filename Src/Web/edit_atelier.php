@@ -1,5 +1,5 @@
-<?php include("connexion.php");?>
-<?php
+<?php 
+include("connexion.php");
 if(isset($_GET['modif_article'])){
   
   $rep = $bdd->prepare('SELECT * FROM atelier WHERE id_Atelier =?');
@@ -7,8 +7,7 @@ if(isset($_GET['modif_article'])){
   $donnees = $rep->fetch();
   $rep->closeCursor();
   }
-?>
-<?php
+
 if(isset($_POST['modifier'])){
 
     $req = $bdd->prepare("UPDATE atelier SET titre = ?, theme = ?, type = ?, Remarque = ?, lieu = ?, duree = ?, capacite = ? WHERE id_Atelier =?");
