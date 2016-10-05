@@ -1,3 +1,22 @@
+<?php include("connexion.php");?>
+<?php
+if(isset($_GET['modif_article'])){
+  
+  $rep = $bdd->prepare('SELECT * FROM atelier WHERE id_Atelier =?');
+  $rep->execute(array($_GET['modif_article']));
+  $donnees = $rep->fetch();
+  $rep->closeCursor();
+  }
+?>
+<?php
+if(isset($_POST['modifier'])){
+
+    $req = $bdd->prepare("UPDATE atelier SET titre = ?, theme = ?, type = ?, Remarque = ?, lieu = ?, duree = ?, capacite = ? WHERE id_Atelier =?");
+    $req->execute(array($_POST['titre'], $_POST['theme'],$_POST['type'],$_POST['remarque'],$_POST['lieu']
+      ,$_POST['duree'],$_POST['capacite'], $_POST['id']));
+    header('Location: list_atelier.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,42 +25,28 @@
  <meta charset="UTF-8"> 
 </head>
 <body>
-<?php
-
-
-if(isset($_POST['workshopList']) && !empty($_POST['workshopList'])){
-	$values = $_POST['workshopList'];
-	$title = (isset($values[0]) && $values[0] == 1)? "La terre dans le système solaire" : "Title";
-
-    foreach($values as $selectValue){
-		//affichage des valeurs sélectionnées
-                echo $selectValue."<br>";
-	}
-}
-?>
-
-<form action="edit_atelier.php">
-  Titre:<br>
-  <input type="text" name="firstname" value="<?php echo $title ?>">
-  <br>
-  Thème :<br>
-  <input type="text" name="lastname" value="Thème">
-  <br>
-	Laboratoire :<br>
-  <input type="text" name="lastname" value="Labo">
-  <br>
-   Autre :<br>
-  <input type="text" name="lastname" value="Autre">
-  <br>
-   Decription :<br>
-  <textarea rows="4" cols="50">
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta finibus elit. Aliquam ultrices congue ligula, non aliquet augue lobortis sed. Sed euismod tortor non arcu auctor malesuada. Curabitur ac orci in est dignissim pharetra vitae et mi. Proin ligula orci, vehicula ac augue at, condimentum ornare arcu. Aliquam sodales posuere porta. Cras eget sagittis elit, in molestie odio.
-
-Curabitur semper ante at ex bibendum pharetra. Sed viverra massa vel ex ullamcorper volutpat. Fusce tincidunt sed eros eget convallis. Mauris suscipit, nunc a facilisis suscipit, mi felis congue massa, at tincidunt diam erat vitae lacus. In augue massa, aliquet vitae maximus a, pellentesque quis turpis. Integer erat ex, vehicula ac velit id, molestie tincidunt nisi. Vestibulum eu ligula nunc. Ut bibendum congue tortor sed interdum. Nullam in rhoncus nulla. Proin et dui a est viverra scelerisque. Nam non arcu pretium, facilisis eros a, porta odio. Suspendisse vitae commodo ipsum.
-
-</textarea>
-  <br>
-  <input type="submit" value="modifier">
+<h3></h3>
+<form action="edit_atelier.php" method="POST">
+  <h1>Modifier un atelier</h1>
+  <input type="hidden" name="id" value="<?php echo $_GET['modif_article']?>">
+  <label>Titre</label><br>
+  <input type="text" name="titre" value="<?php echo $donnees['titre']?>"><br>
+  <label>Thème</label><br>
+  <input type="text" name="theme" value="<?php echo $donnees['theme']?>"><br>
+  <label>Type</label><br>
+  <input type="text" name="type" value="<?php echo $donnees['type']?>"><br>
+  <label>Lieu</label><br>
+  <input type="text" name="lieu" value="<?php echo $donnees['lieu']?>"><br>
+  <label>Remarque</label><br>
+  <textarea rows="4" cols="50" name="remarque">
+   <?php echo $donnees['Remarque']?>
+  </textarea><br>
+  <label>Durée</label><br>
+  <input type="text" name="duree" value="<?php echo $donnees['duree']?>"><br>
+  <label>Capacité</label><br>
+  <input type="text" name="capacite" value="<?php echo $donnees['capacite']?>"><br>
+  
+  <input type="submit" name= "modifier" value="modifier">
 </form>
  
 </body>
