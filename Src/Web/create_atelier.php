@@ -51,7 +51,7 @@
 
 
 		$sql_query->execute();
-				
+
 		if ($sql_query) {
 			$state['query'] = 1;
 		}
@@ -63,13 +63,19 @@
  	}	
 
 
- 	function create_slots($bdd, $arguments,$id_atelier)
+ 	function create_slots($bdd, $arguments)
     {
-        if(empty($argument) || isset($id_atelier))
+        if(empty($arguments))
         	return;
         	
         $state = array();
-		
+
+        $workshop = $bdd->prepare("SELECT `id_Atelier` FROM atelier ORDER BY `id_Atelier` DESC LIMIT 1" );
+        $workshop->execute();
+        $workshop->setFetchMode(PDO::FETCH_ASSOC);
+        $id_atelier = $workshop->fetch()['id_Atelier'];
+
+
         $original = array( "mon"=>array(), "tue" => array(), "wed" => array(), "thu" => array(), "fri" => array());
         $complete = array_merge($original,$arguments);
         $allKeys = array_merge(array("id_atelier"),array_keys($complete));
@@ -114,14 +120,13 @@
    	 $capacity=$_POST['capacity'];
    	 $id_labo = '1';
    	 $id_creneaux = '1';
-   	 $id_atelier = '4';
    	 $remarque = $_POST['remark'];
    	 $workshop_data = array(":title" => $title , ":theme"=>$theme, ":type"=>$type, ":remarque" => $remarque, ":place"=>$place, ":duration"=>$duration, ":capacity"=>$capacity, ":id_creneaux"=>$id_creneaux,":id_lab"=>$id_labo);
 	 $response = create_workshop($bdd,$workshop_data);
 
      if( isset($_POST['slots']) && is_array($_POST['slots']) ) {
          $slots = $_POST['slots'];
-         $response = create_slots($bdd,$slots,$id_atelier);
+         $response = create_slots($bdd,$slots);
 
      }
 }
