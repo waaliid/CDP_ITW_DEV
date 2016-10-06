@@ -13,6 +13,7 @@
 <form id="edit-form" method = "GET">
 
 <div class = "form-group" >
+<h3><a href="index.php">Accueil</a></h3>
 <h3>Liste des Ateliers</h3>
 <table>
       
