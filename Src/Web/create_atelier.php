@@ -142,25 +142,26 @@
 </head>
 <body>
 <form class = "createWorkshop" method="POST" >
-  <h1>Ajout d'un atelier</h1>
+  <h3><a href="index.php">Accueil</a></h3>
+  <h2>Ajout d'un atelier</h2>
   <div class="form_item">
     <label for="title">Titre</label>
-      <input type="text" name="title" id="title"  />
+      <input type="text" name="title" id="title"  required = "required"/>
   </div>
     <div class="form_item">
 
     <label for="theme">Thème</label>
 
-    <input type="text" name="theme" id="theme"   >
+    <input type="text" name="theme" id="theme"  required = "required"/>
   	</div>
   	
     <div class="form_item">
     <label for="type">Type</label>
-    <input type="text" name="type" id="type" >
+    <input type="text" name="type" id="type" required = "required"/>
     </div>
 
 
-<table class="form-checkbox">
+<table class="form-checkbox" >
     <tbody>
     <tr>
         <th>Créneaux</th>
@@ -168,7 +169,7 @@
 
         <fieldset class="morningSlots">
 
-            <label for="checkOne" ><input type="checkbox" id="checkOne" name="slots[mon][am]">Lundi matin</label><br />
+            <label for="checkOne" ><input type="checkbox" id="checkOne" name="slots[mon][am]" >Lundi matin</label><br />
 
 
             <label for="checkTwo" ><input type="checkbox" id="checkTwo" name="slots[tue][am]" >Mardi matin</label><br />
@@ -234,12 +235,12 @@
 
     <label for="place">Lieu</label>
 
-    <input type="text" name="place">
+    <input type="text" name="place" required = "required">
     </div>
     <div class="form_item">
 
     <label>Remarque</label>
-  <textarea name = "remark" rows="4" cols="50">
+  <textarea name = "remark" rows="4" cols="50" required = "required">
   </textarea>
     </div>
 
@@ -247,13 +248,13 @@
 
     <label for="duration">Durée </label>
 
-    <input type="text" name="duration" id="duration">
+    <input type="text" name="duration" id="duration" required = "required">
         </div>
     <div class="form_item">
 
     <label for = "capacity">Capacitée</label>
 
-    <input type="text" name="capacity" id="capacity" >
+    <input type="text" name="capacity" id="capacity" required = "required">
     </div>
 
     <input type="submit" name = "validate" value="valider">
