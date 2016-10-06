@@ -10,7 +10,7 @@
 </head>
 <body onload="load()">
 
-<form id="edit-form" method = "POST">
+<form id="edit-form" method = "GET">
 
 <div class = "form-group" >
 <h3>Liste des Ateliers</h3>
@@ -29,8 +29,16 @@
 
  	</tr>
 <?php
-$reponse = $bdd->query('SELECT * FROM atelier');
-while ($donnees = $reponse->fetch())
+$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+$limite = 5;
+$debut = ($page - 1) * $limite;
+$query = 'SELECT * FROM atelier LIMIT :limite OFFSET :debut';
+$query = $bdd->prepare($query);
+$query->bindValue('limite', $limite, PDO::PARAM_INT);
+$query->bindValue('debut', $debut, PDO::PARAM_INT);
+$query->execute();
+
+while ($donnees = $query->fetch())
 { ?>
 
 	 <?php $bool=true; 
@@ -51,13 +59,12 @@ while ($donnees = $reponse->fetch())
 
 		<td><a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir supprimer ?')) document.location.href='delete_atelier.php?supp_article=<?php echo $donnees['id_Atelier']; ?>'">Supprimer</a></td>
 	</tr>
-<?php 
-}
-
-$reponse->closeCursor();
-
+<?php }
 ?>
 </table>
+<a href="?page=<?php echo $page - 1; ?>">Page précédente</a>
+—
+<a href="?page=<?php echo $page + 1; ?>">Page suivante</a>
 </div>
 
 <div class= "form-inline">
