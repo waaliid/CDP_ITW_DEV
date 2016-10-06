@@ -25,6 +25,7 @@
         }
         return $result;
     }
+    
 	function create_workshop($bdd, $arguments)
 	{
 		$state = array();
@@ -78,7 +79,7 @@
         // -- insert into database
         $query = "INSERT INTO". " creneaux "  . " (id_atelier,lundi,mardi,mercredi,jeudi,vendredi)"
             ." VALUES (". implode(', ',$keys ) . ")";
-        $sql_query = $bdd->prepare($query);
+                $sql_query = $bdd->prepare($query);
 
         foreach ($params as $key => &$val) {
             $sql_query->bindParam($key, $val, PDO::PARAM_INT);
@@ -129,85 +130,122 @@
  <meta charset="UTF-8"> 
 </head>
 <body>
-<form method="POST" >
+<form class = "createWorkshop" method="POST" >
   <h1>Ajout d'un atelier</h1>
-  <input type="text" name="title" >
-  <br>
-  <input type="text" name="theme"  >
-  <br>
-  <input type="text" name="type"  >
-  <br>
-	Date : <br>
-  <TABLE>
-    <tr>
-    <td>
-    <input type="checkbox" name="slots[mon][am]">Lundi matin<br>
-    </td>
-    <td>
-    <input type="checkbox" name="slots[mon][pm]">Lundi après-midi<br>
-    </td> 
-    </tr>
-    <tr>
-    <td>
-    <input type="checkbox" name="slots[tue][am]" >Mardi matin<br>
-    </td>
-    <td>
-    <input type="checkbox" name="slots[tue][pm]" >Mardi après-midi<br>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <input type="checkbox" name="slots[wed][am]" value="">Mercredi matin<br>
-    </td>
-    <td>
-    <input type="checkbox" name="slots[wed][pm]" value="">Mercredi après-midi<br>
-    </td> 
-    </tr>
-    <tr>
-    <td>
-    <input type="checkbox" name="slots[thu][am]" value="">Jeudi matin<br>
-    </td>
-    <td>
-    <input type="checkbox" name="slots[thu][pm]" value="">Jeudi après-midi<br>
-    </td> 
-    </tr>
-    <tr>
-    <td>
-    <input type="checkbox" name="slots[fri][am]" value="">Vendredi matin<br>
-    </td>
-    <td>
-    <input type="checkbox" name="slots[fri][pm]" value="">Vendredi après-midi<br>
-    </td> 
-    </tr>
-    
-  </TABLE>
-      <select name="labo">
-          <?php
-          $sql_lab = $bdd->prepare('SELECT * FROM laboratoire');
-          $sql_lab->execute();
-          if ( $sql_lab->rowCount() > 0 ) {
-            $sql_lab->setFetchMode(PDO::FETCH_ASSOC);
+  <div class="form_item">
+    <label for="title">Titre</label>
+      <input type="text" name="title" id="title"  />
+  </div>
+    <div class="form_item">
 
-              while ($lab = $sql_lab->fetch()) { ?>
+    <label for="theme">Thème</label>
 
-                  <option value = "<?php echo $lab['nom']?>"> "<?php echo $lab['nom']?>" </option>
+    <input type="text" name="theme" id="theme"   >
+  	</div>
+  	
+    <div class="form_item">
+    <label for="type">Type</label>
+    <input type="text" name="type" id="type" >
+    </div>
 
-              <?php }}
-          $sql_lab->closeCursor(); // we will not use it anymore, so we must close server connection
-          ?>
-      </select>
-  <br>
-  <input type="text" name="place">
-  <br>
+
+<table class="form-checkbox">
+    <tbody>
+    <tr>
+        <th>Créneaux</th>
+    <td>
+
+        <fieldset class="morningSlots">
+
+            <label for="checkOne" ><input type="checkbox" id="checkOne" name="slots[mon][am]">Lundi matin</label><br />
+
+
+            <label for="checkTwo" ><input type="checkbox" id="checkTwo" name="slots[tue][am]" >Mardi matin</label><br />
+
+
+            <label for="checkThree" ><input type="checkbox" id="checkThree" name="slots[thu][am]" value="">Jeudi matin</label><br />
+
+
+            <label for="checkFour"> <input type="checkbox" id="checkFour" name="slots[wed][am]" value="">Mercredi matin</label><br />
+
+
+
+            <label for="checkFive"> <input type="checkbox" id="checkFive" name="slots[fri][am]" value="">Vendredi matin</label><br />
+
+        </fieldset>
+
+    </td>
+
+        <td>
+
+        <fieldset class="afternoonSlots">
+
+
+    <label for="checkSix"><input type="checkbox" id="checkSix" name="slots[mon][pm]">Lundi après-midi</label><br />
+
+
+    <label for="checkSeven" ><input type="checkbox" id="checkSeven" name="slots[tue][pm]">Mardi après-midi</label><br />
+
+    <label for="checkEight" ><input type="checkbox"id="checkEight" name="slots[wed][pm]" value="">Mercredi après-midi</label><br />
+
+
+    <label for="checkNine" ><input type="checkbox" id="checkNine" name="slots[thu][pm]" value="">Jeudi après-midi</label><br />
+
+    <label for="checkTen" ><input type="checkbox" id="checkTen" name="slots[fri][pm]" value="">Vendredi après-midi</label><br />
+    </fieldset>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+    <div class="form_item">
+        <label>Laboratoires</label>
+        <select name="labo">
+            <?php
+            $sql_lab = $bdd->prepare('SELECT * FROM laboratoire');
+            $sql_lab->execute();
+            if ( $sql_lab->rowCount() > 0 ) {
+                $sql_lab->setFetchMode(PDO::FETCH_ASSOC);
+
+                while ($lab = $sql_lab->fetch()) { ?>
+
+                    <option value = "<?php echo $lab['nom']?>"> "<?php echo $lab['nom']?>" </option>
+
+                <?php }}
+            $sql_lab->closeCursor(); // we will not use it anymore, so we must close server connection
+            ?>
+        </select>
+    </div>
+
+    <div class="form_item">
+
+    <label for="place">Lieu</label>
+
+    <input type="text" name="place">
+    </div>
+    <div class="form_item">
+
+    <label>Remarque</label>
   <textarea name = "remark" rows="4" cols="50">
-   Remarque
   </textarea>
-  <br>
-  <input type="text" name="duration" >
-  <br>
-  <input type="text" name="capacity" >
-  <br>
-  <input type="submit" name = "validate" value="valider">
-</form> 
+    </div>
+
+    <div class="form_item">
+
+    <label for="duration">Durée </label>
+
+    <input type="text" name="duration" id="duration">
+        </div>
+    <div class="form_item">
+
+    <label for = "capacity">Capacitée</label>
+
+    <input type="text" name="capacity" id="capacity" >
+    </div>
+
+    <input type="submit" name = "validate" value="valider">
+</form>
 </body>
 </html>
