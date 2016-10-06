@@ -78,11 +78,9 @@
         // -- insert into database
         $query = "INSERT INTO". " creneaux "  . " (id_atelier,lundi,mardi,mercredi,jeudi,vendredi)"
             ." VALUES (". implode(', ',$keys ) . ")";
-        var_dump($query);
-                $sql_query = $bdd->prepare($query);
+        $sql_query = $bdd->prepare($query);
 
         foreach ($params as $key => &$val) {
-            var_dump($val);
             $sql_query->bindParam($key, $val, PDO::PARAM_INT);
         }
 
