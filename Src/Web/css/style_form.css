@@ -54,7 +54,13 @@ table.form-checkbox {
     box-sizing: border-box;
 }
 
+.morningSlots {
+   border-style: none; 
+}
 
+.afternoonSlots{
+    border-style: none; 
+}
 
 input[type="checkbox"] {
     height: 25px;
@@ -115,6 +121,7 @@ input[type=button], input[type=submit], input[type=reset] {
     border: none;
     color: white;
     padding: 16px 32px;
+    margin-bottom: 16px;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
