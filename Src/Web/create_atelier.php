@@ -28,6 +28,9 @@
     
 	function create_workshop($bdd, $arguments)
 	{
+		if(empty($arguments))
+			return;
+			
 		$state = array();
 
 		$keys = array_keys($arguments);
@@ -62,8 +65,11 @@
 
  	function create_slots($bdd, $arguments,$id_atelier)
     {
+        if(empty($argument) || isset($id_atelier))
+        	return;
+        	
         $state = array();
-
+		
         $original = array( "mon"=>array(), "tue" => array(), "wed" => array(), "thu" => array(), "fri" => array());
         $complete = array_merge($original,$arguments);
         $allKeys = array_merge(array("id_atelier"),array_keys($complete));
