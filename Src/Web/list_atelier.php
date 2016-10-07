@@ -59,9 +59,9 @@ while ($donnees = $query->fetch())
 		<td><?php echo $donnees['lieu']; ?></td>
 		<td><?php echo $donnees['duree']; ?></td>
 		<td><?php echo $donnees['capacite']; ?></td>
-		<td><a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir modifier ?')) document.location.href='edit_atelier.php?modif_article=<?php echo $donnees['id_Atelier']; ?>'">Modifier</a></td>
-
-		<td><a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir supprimer ?')) document.location.href='delete_atelier.php?supp_article=<?php echo $donnees['id_Atelier']; ?>'">Supprimer</a></td>
+		<td><a href="edit_atelier.php?modif_article=<?php echo $donnees['id_Atelier']; ?>'">Modifier</a></td>
+		<td><a href="delete_atelier.php?supp_article=<?php echo $donnees['id_Atelier']; ?>'">Supprimer</a></td>
+	<!-- javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir supprimer ?')) document.location.href=' -->
 	</tr>
 <?php }
 ?>
